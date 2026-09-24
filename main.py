@@ -1,11 +1,11 @@
-from database import add_expense, show_expense, remove_expense, update_expensedb, viewbyinc, viewbydesc, costsum, filterbyfood, filterbyshopping, filterbytransport
+from database import add_expense, show_expense, remove_expense, update_expensedb, viewbyinc, viewbydesc, costsum, filterbyfood, filterbyshopping, filterbytransport, today, sortbyyear, sortbymonth, sortbydate, keywordsearch
 
 def save_expense():
     amount = int(input("Enter Amount: "))
     category = input("Enter Category: ")
     description = input("Description: ")
 
-    add_expense(amount, category, description)
+    add_expense(amount, category, description, today)
 
 def delete_expense():
     userdeleteid = int(input("Which ID you want to delete: "))
@@ -34,6 +34,8 @@ while True:
         print("2. View in Decreasing Order")
         print("3. View Summary")
         print("4. Sort by Category")
+        print("5. Sort by Date")
+        print("6. Search")
 
         sort = int(input("Enter choice: "))
 
@@ -54,6 +56,35 @@ while True:
                 print(filterbytransport())
             elif userifilter == 3:
                 print(filterbyshopping())
+        elif sort == 5:
+            print("1. Sort by Year")
+            print("2. Sort by Month")
+            print("3. Sort by Date")
+            
+            sortdate = int(input("Enter choice: "))
+            
+            if sortdate == 1:
+                yearstart = int(input("Starting Year: "))
+                yearend = int(input("Ending Year: "))
+                print(sortbyyear(yearstart, yearend))
+            elif sortdate == 2:
+                monthyearstart = int(input("Starting Year: "))
+                monthyearend = int(input("Ending Year: "))
+                monthstart = int(input("Starting Month(1-12): "))
+                monthend = int(input("Ending Month(1-12): "))
+                print(sortbymonth(monthyearstart, monthyearend, monthstart, monthend))
+            elif sortdate == 3:
+                dateyearstart = int(input("Starting Year: "))
+                dateyearend = int(input("Ending Year: "))
+                datemonthstart = int(input("Starting Month(1-12): "))
+                datemonthend = int(input("Ending Month(1-12): "))
+                datestart = int(input("Starting Date: "))
+                dateend = int(input("Ending Date: "))
+                print(sortbydate(dateyearstart, dateyearend, datemonthstart, datemonthend, datestart, dateend))
+        elif sort == 6:
+            keyword = input("Enter Keyword: ")
+            print(keywordsearch(keyword))
+            
     elif useri == 3:
         print(show_expense())
         delete_expense()
